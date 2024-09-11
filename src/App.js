@@ -36,7 +36,11 @@ function Board({ xIsNext, squares, onPlay })
 
 
   let status;
-  if (winner)
+  if (winnerInfo.winner === 'Draw')
+  {
+    status = 'It\'s a draw!';
+  }
+  else if (winner)
   {
     status = "winner: " + winner;
   } else
@@ -160,5 +164,6 @@ function calculateWinner(squares)
     }
   }
 
-  return { winner: null, winningSquares: [] };
+  const isDraw = squares.every(square => square !== null);
+  return { winner: isDraw ? 'Draw' : null, winningSquares: [] };
 }
